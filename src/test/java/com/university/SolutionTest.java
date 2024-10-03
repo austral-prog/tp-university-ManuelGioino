@@ -32,8 +32,7 @@ public class SolutionTest {
                    (expectedLine = expectedReader.readLine()) != null) {
                 assertEquals(expectedLine, solutionLine, "Mismatch found in the CSV file content.");
             }
-            
-            // Ensure both files have the same number of lines
+
             assertEquals(solutionReader.readLine(), expectedReader.readLine(), "Files have different number of lines.");
 
         } catch (IOException e) {
