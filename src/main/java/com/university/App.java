@@ -53,8 +53,8 @@ public class App {
             for (Map.Entry<String, Integer> entry : sortedEntries) {
                 writer.write(entry.getKey() + "," + entry.getValue() + "\n");
             }
-            writer.write("\n");
-            
+//            writer.write("\n");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
