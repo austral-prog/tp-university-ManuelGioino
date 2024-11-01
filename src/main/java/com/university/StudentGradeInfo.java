@@ -3,7 +3,7 @@ package com.university;
 public class StudentGradeInfo {
     private String studentName;
     private String subjectName;
-    private String evaluationName;  // <-- Nuevo campo para el nombre de la evaluación
+    private String evaluationName;
     private double finalExamSum;
     private double lastPracticalWorkGrade;
     private double oralExamGrade;
@@ -55,7 +55,7 @@ public class StudentGradeInfo {
     }
 
     public String getEvaluationName() {
-        return evaluationName;  // <-- Método para obtener el nombre de la evaluación
+        return evaluationName;  //obtener el nombre de la evaluación
     }
 
     public double getFinalGrade() {

@@ -16,11 +16,10 @@ public class EvaluationProcessor {
             String evaluationName = row[3].trim();
             double grade = Double.parseDouble(row[5].trim());
 
-            // Clave única para cada estudiante y materia
             String key = studentName + "_" + subjectName;
             StudentGradeInfo gradeInfo = studentGrades.getOrDefault(key, new StudentGradeInfo(studentName, subjectName, evaluationName));
 
-            // Procesar cada tipo de evaluación según los criterios de calificación
+
             switch (evaluationType) {
                 case "FINAL_EXAM":
                     gradeInfo.addFinalExamGrade(grade);
@@ -36,7 +35,6 @@ public class EvaluationProcessor {
                     break;
             }
 
-            // Almacenar el objeto actualizado
             studentGrades.put(key, gradeInfo);
         }
 

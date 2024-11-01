@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CSVWriter {
 
-    // Método para escribir la Parte 1: Student_Name y Course_Count
+
     public void writeCSV(String filePath, Map<String, Integer> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("Student_Name,Course_Count\n");
@@ -24,7 +24,7 @@ public class CSVWriter {
         }
     }
 
-    // Método para escribir la Parte 2: Subject_Name, Evaluation_Name, Student_Name, Grade
+
     public void writeStudentGrades(String filePath, Map<String, StudentGradeInfo> studentGrades) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("Subject_Name,Evaluation_Name,Student_Name,Grade\n");
