@@ -28,4 +28,3 @@ public class Course {
         this.roomNumber = roomNumber;
     }
 }
-

@@ -1,62 +1,39 @@
 package com.university;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class App {
 
     public static void main(String[] args) {
-        String inputFilePath = "src/main/resources/input.csv";
-        String outputFilePath = "src/main/resources/solution.csv";
+        String inputFilePathPart1 = "src/main/resources/input.csv";
+        String outputFilePathPart1 = "src/main/resources/solution.csv";
+        String inputFilePathPart2 = "src/main/resources/input_2.csv";
+        String outputFilePathPart2 = "src/main/resources/solution_2.csv";
 
-        Map<String, Integer> studentCourseCounts = processCSV(inputFilePath);
-        writeOutputCSV(outputFilePath, studentCourseCounts);
+        runPart1(inputFilePathPart1, outputFilePathPart1);
+        runPart2(inputFilePathPart2, outputFilePathPart2);
     }
 
-    private static Map<String, Integer> processCSV(String filePath) {
-        Map<String, Set<String>> studentToCoursesMap = new HashMap<>();
+    private static void runPart1(String inputFilePath, String outputFilePath) {
+        CSVReader csvReader = new CSVReader();
+        List<String[]> data = csvReader.readCSV(inputFilePath);
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-            String currentLine;
-            bufferedReader.readLine(); // Skip header line
+        CourseCounter courseCounter = new CourseCounter();
+        Map<String, Integer> studentCourseCounts = courseCounter.countCourses(data);
 
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                String[] data = currentLine.split(",");
-                String student = data[2].trim();
-                String course = data[1].trim();
-
-                // Initialize set if student is not present in map
-                studentToCoursesMap.computeIfAbsent(student, k -> new HashSet<>()).add(course);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Convert set sizes to counts
-        Map<String, Integer> studentCourseCountMap = new HashMap<>();
-        for (Map.Entry<String, Set<String>> entry : studentToCoursesMap.entrySet()) {
-            studentCourseCountMap.put(entry.getKey(), entry.getValue().size());
-        }
-
-        return studentCourseCountMap;
+        CSVWriter csvWriter = new CSVWriter();
+        csvWriter.writeCSV(outputFilePath, studentCourseCounts);
     }
 
-    private static void writeOutputCSV(String filePath, Map<String, Integer> studentCounts) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Student_Name,Course_Count\n");
-            List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(studentCounts.entrySet());
-            sortedEntries.sort(Map.Entry.comparingByKey());
+    private static void runPart2(String inputFilePath, String outputFilePath) {
+        CSVReader csvReader = new CSVReader();
+        List<String[]> data = csvReader.readCSV(inputFilePath);
 
-            for (Map.Entry<String, Integer> entry : sortedEntries) {
-                writer.write(entry.getKey() + "," + entry.getValue() + "\n");
-            }
-//            writer.write("\n");
+        EvaluationProcessor evaluationProcessor = new EvaluationProcessor();
+        Map<String, StudentGradeInfo> studentGrades = evaluationProcessor.processEvaluations(data);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CSVWriter csvWriter = new CSVWriter();
+        csvWriter.writeStudentGrades(outputFilePath, studentGrades);
     }
 }
