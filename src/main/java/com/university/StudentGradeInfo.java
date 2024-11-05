@@ -4,7 +4,7 @@ public class StudentGradeInfo {
     private String studentName;
     private String subjectName;
     private String evaluationName;
-    private double finalExamSum;
+    private double FINAL_PRACTICAL_WORK;
     private double lastPracticalWorkGrade;
     private double oralExamGrade;
     private double writtenExamSum;
@@ -17,35 +17,36 @@ public class StudentGradeInfo {
     }
 
     public void addFinalExamGrade(double grade) {
-        this.finalExamSum += grade;
+        this.FINAL_PRACTICAL_WORK += grade; // Suma todas las notas del examen final
     }
 
     public void setLastPracticalWorkGrade(double grade) {
-        this.lastPracticalWorkGrade = grade;
+        this.lastPracticalWorkGrade = grade; // Guarda la última nota de trabajo práctico
     }
 
     public void setOralExamGrade(double grade) {
-        this.oralExamGrade = grade;
+        this.oralExamGrade = grade; // Solo una nota para el examen oral
     }
 
     public void addWrittenExamGrade(double grade) {
-        this.writtenExamSum += grade;
-        this.writtenExamCount++;
+        this.writtenExamSum += grade; // Suma las notas de los exámenes escritos
+        this.writtenExamCount++;      // Incrementa el contador para el promedio
     }
 
     public double calculateFinalGrade() {
-        if (finalExamSum > 0) {
-            return finalExamSum;
+        if (FINAL_PRACTICAL_WORK > 0) {
+            return FINAL_PRACTICAL_WORK;  // Suma para exámenes finales
         } else if (lastPracticalWorkGrade > 0) {
-            return lastPracticalWorkGrade;
+            return lastPracticalWorkGrade;  // Última nota de trabajos prácticos
         } else if (oralExamGrade > 0) {
-            return oralExamGrade;
+            return oralExamGrade;  // Única nota para examen oral
         } else if (writtenExamCount > 0) {
-            return writtenExamSum / writtenExamCount;
+            return writtenExamSum / writtenExamCount;  // Promedio para exámenes escritos
         }
-        return 0;
+        return 0;  // Retorno por defecto si no hay evaluaciones
     }
 
+    // Getters
     public String getStudentName() {
         return studentName;
     }
@@ -55,7 +56,7 @@ public class StudentGradeInfo {
     }
 
     public String getEvaluationName() {
-        return evaluationName;  //obtener el nombre de la evaluación
+        return evaluationName;
     }
 
     public double getFinalGrade() {

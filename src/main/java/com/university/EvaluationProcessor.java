@@ -16,12 +16,15 @@ public class EvaluationProcessor {
             String evaluationName = row[3].trim();
             double grade = Double.parseDouble(row[5].trim());
 
-            String key = studentName + "_" + subjectName;
+            // Crear una clave única que incluya studentName, subjectName, evaluationType y evaluationName
+            String key = studentName + "_" + subjectName + "_" + evaluationType + "_" + evaluationName;
+
+            // Obtener o crear una nueva instancia de StudentGradeInfo para cada evaluación
             StudentGradeInfo gradeInfo = studentGrades.getOrDefault(key, new StudentGradeInfo(studentName, subjectName, evaluationName));
 
-
+            // Agregar la nota según el tipo de evaluación
             switch (evaluationType) {
-                case "FINAL_EXAM":
+                case "FINAL_PRACTICAL_WORK":
                     gradeInfo.addFinalExamGrade(grade);
                     break;
                 case "PRACTICAL_WORK":
@@ -35,6 +38,7 @@ public class EvaluationProcessor {
                     break;
             }
 
+            // Guardar la evaluación en el mapa con la clave completa
             studentGrades.put(key, gradeInfo);
         }
 

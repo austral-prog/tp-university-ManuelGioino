@@ -23,7 +23,7 @@ public class App {
         Map<String, Integer> studentCourseCounts = courseCounter.countCourses(data);
 
         CSVWriter csvWriter = new CSVWriter();
-        csvWriter.writeCSV(outputFilePath, studentCourseCounts);
+        csvWriter.writeCSV(outputFilePath, studentCourseCounts);  // Use writeCSV for Part 1
     }
 
     private static void runPart2(String inputFilePath, String outputFilePath) {
@@ -34,6 +34,6 @@ public class App {
         Map<String, StudentGradeInfo> studentGrades = evaluationProcessor.processEvaluations(data);
 
         CSVWriter csvWriter = new CSVWriter();
-        csvWriter.writeStudentGrades(outputFilePath, studentGrades);
+        csvWriter.writeStudentGrades(outputFilePath, studentGrades);  // Use writeStudentGrades for Part 2
     }
 }
