@@ -1,5 +1,7 @@
 package com.university.CLI;
 
+import com.university.CLI.crudrepository.CRUDRepository;
+
 public interface CLI {
     /**
      * Runs the Command Line Interface (CLI) for interacting with multiple entity types.
@@ -11,4 +13,5 @@ public interface CLI {
      *                       operations on that specific entity type.
      */
     void runCLI(CRUDRepository<?>[] crudInterfaces);
+
 }
